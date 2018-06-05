@@ -1,0 +1,82 @@
+/* General Styles */
+body {
+  font-family: 'Heebo', 'roboto', Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: #f34c4c;
+}
+
+a:hover,
+a:active,
+a:focus {
+  color: #fb6464;
+}
+
+nav.app-nav {
+  background-color: #f34c4c;
+}
+
+nav.app-nav .brand-logo {
+  margin-left: 30px;
+}
+
+nav.app-nav a:hover,
+nav.app-nav a:active,
+nav.app-nav a:focus {
+  color: white;
+}
+
+.btn {
+  background-color: #f34c4c;
+}
+
+.btn:hover,
+.btn:active,
+.btn:focus {
+  background-color: #fb6464;
+}
+
+/* Page Styles */
+.page-index .header {
+  height: 460px;
+  background-color: #D5D5D5;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5),  rgba(125, 125, 125, 0.1)), url('../img/home-header.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.page-index .header h1 {
+  font-family: 'Lobster', Arial, Helvetica, sans-serif;
+  color: white;
+  text-align: center;
+  margin-top: 140px;
+}
+
+.page-index .header p {
+  text-align: center;
+  font-size: 20px;
+  color: white;
+}
+
+.page-login .login-card {
+  margin-top: 30px;
+}
+
+.page-login .login-card .link-register span {
+  display: block;
+  margin-top: 30px;
+  line-height: 160%;
+}
+
+.page-signup .signup-card {
+  margin-top: 30px;
+}
+
+.page-signup .signup-card .link-login span {
+  display: block;
+  margin-top: 30px;
+  line-height: 160%;
+}
