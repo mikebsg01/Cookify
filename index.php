@@ -3,7 +3,7 @@
 <div class="page-index row">
   <header>
     <div class="col s12 header">
-      <h1>Tasy & Fast</h1>
+      <h1>Tasty & Fast</h1>
       <p>This App is so Amazing</p>
     </div>
   </header>
