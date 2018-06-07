@@ -1,7 +1,7 @@
 -- Schema db_cookify
 CREATE SCHEMA IF NOT EXISTS `db_cookify` DEFAULT CHARACTER SET utf8 ;
 
-USE `db_cookify` ;
+USE `db_cookify`;
 
 -- Table `db_cookify`.`images`
 CREATE TABLE IF NOT EXISTS `db_cookify`.`images` (
@@ -132,3 +132,16 @@ CREATE TABLE IF NOT EXISTS `db_cookify`.`invoices` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+-- Initial Values
+
+INSERT INTO `db_cookify`.`images` (`file_path`, `file_name`, `file_extension`)
+		VALUES ('/public/users/img_profile', 'img_default', 'png');
+
+INSERT INTO `db_cookify`.`users` 
+	(`is_admin`,`first_name`, `last_name`, `full_name`, `photo_id`, `phone_number`, `email`, `password`)
+    VALUES (1, 'Michael Brandon', 'Serrato Guerrero', 'Michael Brandon Serrato Guerrero', 1, '4422332139', 'mikebsg01@gmail.com', SHA2('hola123', 256));
+
+INSERT INTO `db_cookify`.`users` 
+	(`is_admin`,`first_name`, `last_name`, `full_name`, `photo_id`, `phone_number`, `email`, `password`)
+    VALUES (1, 'Perla Elizabeth', 'Aguilar Maldonado', 'Perla Elizabeth Aguilar Maldonado', 1, '4422334455', 'perla.aguilar@gmail.com', SHA2('hola123', 256));

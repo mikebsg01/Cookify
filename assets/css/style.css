@@ -1,6 +1,35 @@
 /* General Styles */
+.app-print {
+  padding: 8px 12px;
+  background-color: #555;
+  border: 1px solid #333;
+  border-radius: 3px;
+  color: #f1f1f1;
+  font-family: "Roboto", arial, sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.9px;
+  margin-bottom: 0;
+}
+
 body {
   font-family: 'Heebo', 'roboto', Arial, Helvetica, sans-serif;
+}
+
+body::-webkit-scrollbar-track{
+  -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius:10px;background-color:#F5F5F5
+}
+
+body::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background-color: #F5F5F5
+}
+
+body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #616161
 }
 
 a {
@@ -35,6 +64,10 @@ nav.app-nav a:focus {
 .btn:active,
 .btn:focus {
   background-color: #fb6464;
+}
+
+.lbl-error {
+  color: red;
 }
 
 /* Page Styles */
