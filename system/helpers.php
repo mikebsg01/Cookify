@@ -239,7 +239,7 @@ if (! function_exists('getCategory')) {
   if ($result->num_rows == 1) {
     $category = $result->fetch_assoc();
 
-    return $category;
+    return (object) $category;
   }
   return null;
   }

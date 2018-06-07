@@ -143,6 +143,13 @@ INSERT INTO `db_cookify`.`images` (`file_path`, `file_name`, `file_extension`)
 INSERT INTO `db_cookify`.`images` (`file_path`, `file_name`, `file_extension`) 
     VALUES('/public/plates/img', 'img_default', 'png');
 
+-- Seeding "Plate images":
+INSERT INTO `db_cookify`.`images` (`file_path`, `file_name`, `file_extension`) 
+    VALUES('/public/plates/img', 'img-20180607-131313-hamburguesa-pollo', 'jpg');
+
+INSERT INTO `db_cookify`.`images` (`file_path`, `file_name`, `file_extension`) 
+    VALUES('/public/plates/img', 'img-20180607-131829-pizza-con-extra-queso', 'jpg');
+
 -- Seeding "Categories":
 INSERT INTO `db_cookify`.`categories` (`name`, `slug`) 
     VALUES('comida rápida', 'comida-rapida');
@@ -151,7 +158,12 @@ INSERT INTO `db_cookify`.`categories` (`name`, `slug`)
 INSERT INTO `db_cookify`.`plates` (`name`, `slug`, `description`, `price`, `category_id`, `image_id`) 
       VALUES('hamburguesa de pollo', 'hamburguesa-pollo', 
              'Rica hamburguesa de pollo, con lechuga, jitomate, queso amarillo y pepinillos.', 
-             49.90, 1, 2);
+             49.90, 1, 3);
+
+INSERT INTO `db_cookify`.`plates` (`name`, `slug`, `description`, `price`, `category_id`, `image_id`) 
+      VALUES('Pizza con extra queso', 'pizza-con-extra-queso', 
+             'Deliciosa Pizza con Extra Queso, acompañada de Peperoni y Orilla Gruesa.', 
+             99, 1, 4);
 
 -- Seeding "Admin Users":
 INSERT INTO `db_cookify`.`users` 

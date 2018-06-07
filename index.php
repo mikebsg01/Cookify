@@ -14,7 +14,7 @@ function indexController() {
 
   if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-      $plates[] = $row;
+      $plates[] = (object) $row;
     }
   }
 }
@@ -43,16 +43,16 @@ include_once 'templates/header.php';
           <div class="col s4">
             <div class="plate-card card">
               <div class="plate-image card-image">
-                <img src="<?php echo getImageSource($plate['image_id']); ?>" alt="Imagen de <?php echo $plate['name']; ?>">
-                <span class="card-title"><?php echo capitalize($plate['name']); ?></span>
+                <img src="<?php echo getImageSource($plate->image_id); ?>" alt="Imagen de <?php echo $plate->name; ?>">
+                <span class="card-title"><?php echo capitalize($plate->name); ?></span>
                 <a href="#" class="btn-floating btn-large halfway-fab waves-effect waves-light red"><i class="material-icons">add_shopping_cart</i></a>
               </div>
               <div class="card-content">
-                <p><?php echo strLimit(trim($plate['description']), 80); ?></p>
+                <p><?php echo strLimit(trim($plate->description), 80); ?></p>
               </div>
               <div class="card-action">
-                <span class="plate-price"><?php echo toMoney($plate['price']); ?></span>
-                <span class="plate-category new badge" data-badge-caption="<?php echo getCategory($plate['category_id'])['name']; ?>"></span>
+                <span class="plate-price"><?php echo toMoney($plate->price); ?></span>
+                <span class="plate-category new badge" data-badge-caption="<?php echo getCategory($plate->category_id)->name; ?>"></span>
               </div>
             </div>
           </div>
