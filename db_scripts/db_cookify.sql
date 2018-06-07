@@ -1,5 +1,5 @@
 -- Schema db_cookify
-CREATE SCHEMA IF NOT EXISTS `db_cookify` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `db_cookify` DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
 
 USE `db_cookify`;
 
@@ -133,11 +133,27 @@ CREATE TABLE IF NOT EXISTS `db_cookify`.`invoices` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
--- Initial Values
+-- ***** INITIAL VALUES *****
 
+-- Seeding "User Photo" by default:
 INSERT INTO `db_cookify`.`images` (`file_path`, `file_name`, `file_extension`)
 		VALUES ('/public/users/img_profile', 'img_default', 'png');
 
+-- Seeding "Plate Image" by default:
+INSERT INTO `db_cookify`.`images` (`file_path`, `file_name`, `file_extension`) 
+    VALUES('/public/plates/img', 'img_default', 'png');
+
+-- Seeding "Categories":
+INSERT INTO `db_cookify`.`categories` (`name`, `slug`) 
+    VALUES('comida rápida', 'comida-rapida');
+
+-- Seeding "Plates":
+INSERT INTO `db_cookify`.`plates` (`name`, `slug`, `description`, `price`, `category_id`, `image_id`) 
+      VALUES('hamburguesa de pollo', 'hamburguesa-pollo', 
+             'Rica hamburguesa de pollo, con lechuga, jitomate, queso amarillo y pepinillos.', 
+             49.90, 1, 2);
+
+-- Seeding "Admin Users":
 INSERT INTO `db_cookify`.`users` 
 	(`is_admin`,`first_name`, `last_name`, `full_name`, `photo_id`, `phone_number`, `email`, `password`)
     VALUES (1, 'Michael Brandon', 'Serrato Guerrero', 'Michael Brandon Serrato Guerrero', 1, '4422332139', 'mikebsg01@gmail.com', SHA2('hola123', 256));

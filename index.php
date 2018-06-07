@@ -1,5 +1,29 @@
-<?php include_once 'templates/head.php' ?>
-<?php include_once 'templates/header.php' ?>
+<?php if (!file_exists('system/core.php')) exit("Sorry, has been ocurred an error trying to load the system.");
+
+require_once 'system/core.php';
+
+$plates = [];
+
+function indexController() {
+  global $plates;
+
+  $result = dbQuery("SELECT * FROM `plates` 
+                     WHERE 1 
+                     ORDER BY created_at ASC 
+                     LIMIT 6");
+
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      $plates[] = $row;
+    }
+  }
+}
+
+indexController();
+
+include_once 'templates/head.php';
+include_once 'templates/header.php'; 
+?>
 <div class="page-index row">
   <header>
     <div class="col s12 header">
@@ -9,8 +33,30 @@
   </header>
   <section>
     <div class="container">
-      <div class="col s12">
-        
+      <div class="plates-container row">
+        <div class="col s12 center-align">
+          <header>
+            <h2 class="plates-container-title">Platillos agregados recientemente</h2>
+          </header>
+        </div>
+        <?php foreach ($plates as $plate): ?>
+          <div class="col s4">
+            <div class="plate-card card">
+              <div class="plate-image card-image">
+                <img src="<?php echo getImageSource($plate['image_id']); ?>" alt="Imagen de <?php echo $plate['name']; ?>">
+                <span class="card-title"><?php echo capitalize($plate['name']); ?></span>
+                <a href="#" class="btn-floating btn-large halfway-fab waves-effect waves-light red"><i class="material-icons">add_shopping_cart</i></a>
+              </div>
+              <div class="card-content">
+                <p><?php echo strLimit(trim($plate['description']), 80); ?></p>
+              </div>
+              <div class="card-action">
+                <span class="plate-price"><?php echo toMoney($plate['price']); ?></span>
+                <span class="plate-category new badge" data-badge-caption="<?php echo getCategory($plate['category_id'])['name']; ?>"></span>
+              </div>
+            </div>
+          </div>
+        <?php endforeach; ?>
       </div>
     </div>
   </section>

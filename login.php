@@ -2,7 +2,7 @@
 
 require_once 'system/core.php';
 
-function validation($data) {
+function loginValidation($data) {
   $errors = 0;
 
   # Email Validation:
@@ -23,7 +23,7 @@ function validation($data) {
   return ! ($errors > 0);
 }
 
-function main() {
+function loginController() {
   if (isLoggued()) {
     header('Location: index.php');
     return;
@@ -35,13 +35,13 @@ function main() {
       'password'
     ]);
 
-    if (validation($user_data)) {
+    if (loginValidation($user_data)) {
       $result = dbQuery("SELECT count(*) as `counter` FROM `users`
                          WHERE `users`.`email` = '{$user_data['email']}' AND
                                `users`.`password` = SHA2('{$user_data['password']}', 256)");
 
       if (getCounter($result) == 1) {
-        authenticate($user_data['email']);
+        login($user_data['email']);
         header('Location: login.php');
         return;
       } else {
@@ -51,7 +51,7 @@ function main() {
   }
 }
 
-main();
+loginController();
 ?>
 <?php include_once 'templates/head.php' ?>
 <?php include_once 'templates/header.php' ?>

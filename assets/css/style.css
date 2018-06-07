@@ -32,6 +32,35 @@ body::-webkit-scrollbar-thumb {
   background-color: #616161
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lobster', Arial, Helvetica, sans-serif;
+  color: #333;
+}
+
+h1 {
+  font-size: 58px;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  font-size: 22px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+h6 {
+  font-size: 16px;
+}
+
 a {
   color: #f34c4c;
 }
@@ -56,14 +85,25 @@ nav.app-nav a:focus {
   color: white;
 }
 
-.btn {
+.btn-primary {
   background-color: #f34c4c;
+  color: white !important;
 }
 
-.btn:hover,
-.btn:active,
-.btn:focus {
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus {
   background-color: #fb6464;
+}
+
+.card-action a {
+  color: #f34c4c;
+}
+
+.card-action a:hover,
+.card-action a:active,
+.card-action a:focus {
+  color: #fb6464;
 }
 
 .lbl-error {
@@ -92,6 +132,27 @@ nav.app-nav a:focus {
   text-align: center;
   font-size: 20px;
   color: white;
+}
+
+.page-index .plates-container .plates-container-title {
+  margin-top: 36px;
+  margin-bottom: 36px;
+}
+
+.page-index .plates-container .plate-card > .plate-image > img {
+  min-height: 260px;
+  height: 260px;
+  max-height: 260px;
+}
+
+.page-index .plates-container .plate-card span.plate-price {
+  font-size: 16px;
+  letter-spacing: 0.4px;
+  color: #0eb525;
+}
+
+.page-index .plates-container .plate-card span.badge.plate-category {
+  background-color: #ffa42f;
 }
 
 .page-login .login-card {
