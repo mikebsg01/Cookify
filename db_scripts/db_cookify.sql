@@ -145,7 +145,7 @@ INSERT INTO `db_cookify`.`images` (`file_path`, `file_name`, `file_extension`)
 
 -- Seeding "Plate images":
 INSERT INTO `db_cookify`.`images` (`file_path`, `file_name`, `file_extension`) 
-    VALUES('/public/plates/img', 'img-20180607-131313-hamburguesa-pollo', 'jpg');
+    VALUES('/public/plates/img', 'img-20180607-131313-hamburguesa-de-res', 'jpg');
 
 INSERT INTO `db_cookify`.`images` (`file_path`, `file_name`, `file_extension`) 
     VALUES('/public/plates/img', 'img-20180607-131829-pizza-con-extra-queso', 'jpg');
@@ -156,8 +156,8 @@ INSERT INTO `db_cookify`.`categories` (`name`, `slug`)
 
 -- Seeding "Plates":
 INSERT INTO `db_cookify`.`plates` (`name`, `slug`, `description`, `price`, `category_id`, `image_id`) 
-      VALUES('hamburguesa de pollo', 'hamburguesa-pollo', 
-             'Rica hamburguesa de pollo, con lechuga, jitomate, queso amarillo y pepinillos.', 
+      VALUES('hamburguesa de res', 'hamburguesa-de-res', 
+             'Rica hamburguesa de res, con lechuga, jitomate, queso amarillo y pepinillos.', 
              49.90, 1, 3);
 
 INSERT INTO `db_cookify`.`plates` (`name`, `slug`, `description`, `price`, `category_id`, `image_id`) 

@@ -133,6 +133,27 @@ if (! function_exists('getError')) {
   }
 }
 
+if (! function_exists('existsFlash')) {
+  function existsFlash(string $key) {
+    return isset($_SESSION['flash'][$key]);
+  }
+}
+
+if (! function_exists('makeFlash')) {
+  function makeFlash(string $key, $content) {
+    $_SESSION['flash'][$key] = $content;
+  }
+}
+
+if (! function_exists('getFlash')) {
+  function getFlash(string $key) {
+    $content = $_SESSION['flash'][$key];
+    unset($_SESSION['flash'][$key]);
+
+    return $content;
+  }
+}
+
 if (! function_exists('login')) {
   function login($email) {
     $_SESSION['auth'] = true;

@@ -6,4 +6,10 @@ $(document).ready(function() {
 
     $('#logout-form').submit();
   });
+
+  $('.app-close-alert').click(function (event) {
+    event.preventDefault();
+
+    $(this).parent().fadeOut(200);
+  });
 });
