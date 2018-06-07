@@ -12,8 +12,16 @@ function addToShoppingCartController() {
   if (!empty($_POST['add_plate'])) {
     $add_plate = $_POST['add_plate'];
 
-    App::print($add_plate);
-    return;
+    $result = dbQuery("SELECT count(*) as `counter`
+                       FROM `plates`
+                       WHERE `plates`.`slug` = '{$add_plate}'");
+
+    if (getCounter($result) == 1) {
+      addToShoppingCart($add_plate);
+
+      header('Location: shopping_cart.php');
+      return;
+    }
   }
 
   header('Location: login.php');

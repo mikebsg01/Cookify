@@ -265,3 +265,27 @@ if (! function_exists('getCategory')) {
   return null;
   }
 }
+
+if (! function_exists('addToShoppingCart')) {
+  function addToShoppingCart($plate_slug) {
+    if (! isset($_SESSION['shopping_cart'])) {
+      $_SESSION['shopping_cart'] = [];
+    }
+
+    $amount = 1;
+
+    if (in_array($plate_slug, array_keys($_SESSION['shopping_cart']))) {
+      $amount = ((int) $_SESSION['shopping_cart'][$plate_slug]) + 1;
+
+      $_SESSION['shopping_cart'][$plate_slug] = $amount;
+    } else {
+      $_SESSION['shopping_cart'] += [$plate_slug => $amount];
+    }
+  }
+}
+
+if (! function_exists('getShoppingCart')) {
+  function getShoppingCart() {
+    return $_SESSION['shopping_cart'];
+  }
+}
