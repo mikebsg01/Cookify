@@ -47,6 +47,10 @@ headerController();
               <form method="POST" action="logout.php" accept-charset="UTF-8" id="logout-form">
                 <input type="hidden" name="logout" value="1">
               </form>
+              <a id="logout-link" href="#">Perfil<i class="material-icons right">exit_to_app</i></a>
+              <form method="POST" action="perfil.php" accept-charset="UTF-8" id="logout-form">
+                <input type="hidden">
+              </form>
             </li>
           </ul>
         <?php else: ?>
