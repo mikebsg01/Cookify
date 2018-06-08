@@ -39,26 +39,34 @@ include_once 'templates/header.php';
             <h2 class="plates-container-title">Platillos más destacados</h2>
           </header>
         </div>
+        <?php $i = 0; ?>
         <?php foreach ($plates as $plate): ?>
-          <div class="col s4">
-            <div class="plate-card card">
-              <div class="plate-image card-image">
-                <img src="<?php echo getImageSource($plate->image_id); ?>" alt="Imagen de <?php echo $plate->name; ?>">
-                <span class="plate-name card-title"><?php echo capitalize($plate->name); ?></span>
-                <form action="add_to_shopping_cart.php" method="POST">
-                  <input type="hidden" name="add_plate" value="<?php echo $plate->slug; ?>">
-                  <button type="submit" class="btn-floating btn-large halfway-fab waves-effect waves-light red"><i class="material-icons">add_shopping_cart</i></button>
-                </form>
+          <?php if ($i % 3 == 0): ?>
+            <div class="row">
+          <?php endif; ?>
+              <div class="col s4">
+                <div class="plate-card card">
+                  <div class="plate-image card-image">
+                    <img src="<?php echo getImageSource($plate->image_id); ?>" alt="Imagen de <?php echo $plate->name; ?>">
+                    <span class="plate-name card-title"><?php echo capitalize($plate->name); ?></span>
+                    <form action="add_to_shopping_cart.php" method="POST">
+                      <input type="hidden" name="add_plate" value="<?php echo $plate->slug; ?>">
+                      <button type="submit" class="btn-floating btn-large halfway-fab waves-effect waves-light red"><i class="material-icons">add_shopping_cart</i></button>
+                    </form>
+                  </div>
+                  <div class="plate-description card-content">
+                    <p><?php echo strLimit(trim($plate->description), 80); ?></p>
+                  </div>
+                  <div class="card-action">
+                    <span class="plate-price"><?php echo toMoney($plate->price); ?></span>
+                    <span class="plate-category new badge" data-badge-caption="<?php echo getCategory($plate->category_id)->name; ?>"></span>
+                  </div>
+                </div>
               </div>
-              <div class="plate-description card-content">
-                <p><?php echo strLimit(trim($plate->description), 80); ?></p>
-              </div>
-              <div class="card-action">
-                <span class="plate-price"><?php echo toMoney($plate->price); ?></span>
-                <span class="plate-category new badge" data-badge-caption="<?php echo getCategory($plate->category_id)->name; ?>"></span>
-              </div>
+          <?php if ($i % 3 == 2): ?>
             </div>
-          </div>
+          <?php endif; ?>
+          <?php ++$i; ?>
         <?php endforeach; ?>
       </div>
     </div>

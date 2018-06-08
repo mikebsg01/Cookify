@@ -413,3 +413,16 @@ if (! function_exists('getTotalPlatesAdded')) {
     return (int) $total_plates;
   }
 }
+
+if (! function_exists('getAllCategories')) {
+  function getAllCategories() {
+    $result     = dbQuery("SELECT * FROM `categories` WHERE 1");
+    $categories = [];
+
+    while ($row = $result->fetch_assoc()) {
+      $categories[] = (object) $row;
+    }
+
+    return $categories;
+  }
+}

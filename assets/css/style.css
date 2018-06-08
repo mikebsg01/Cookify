@@ -212,6 +212,35 @@ nav.app-nav .shopping-cart-notification-badge {
   overflow: hidden;
 }
 
+.page-menu .plates-container .plate-card .plate-description {
+  min-height: 114px;
+  height: 114px;
+  max-height: 114px;
+  overflow: hidden;
+}
+
+.page-menu .plates-container .plate-card span.plate-price {
+  font-size: 16px;
+  letter-spacing: 0.4px;
+  color: #0eb525;
+}
+
+.page-menu .plates-container .plate-card span.badge.plate-category {
+  background-color: #ffa42f;
+}
+
+.page-menu .plates-container .plate-card .plate-name {
+  text-shadow: 2px 2px 1px rgba(0,0,0,0.6);
+}
+
+.page-menu .plates-container .filter-form-container .title {
+  margin-top: 0;
+}
+
+.page-menu .plates-container .filter-form-container .btn-filter {
+  margin-top: 15px;
+}
+
 .page-login .login-card {
   margin-top: 45px;
 }
