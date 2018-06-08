@@ -50,7 +50,7 @@ headerController();
             </li>
           </ul>
         <?php else: ?>
-          <li><a href="#"><i class="material-icons left">list</i> Ver Menú Completo</a></li>
+          <li><a href="menu.php"><i class="material-icons left">list</i> Ver Menú Completo</a></li>
           <li><a href="login.php"><i class="material-icons left">person</i> Iniciar sesión</a></li>
         <?php endif; ?>
       </ul>
