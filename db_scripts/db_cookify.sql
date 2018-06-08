@@ -79,8 +79,8 @@ ENGINE = InnoDB;
 -- Table `db_cookify`.`orders`
 CREATE TABLE IF NOT EXISTS `db_cookify`.`orders` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `comment` TEXT NULL,
   `address` TEXT NOT NULL,
+  `comment` TEXT NULL,
   `user_id` INT NOT NULL,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -98,6 +98,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `db_cookify`.`orders_has_plates` (
   `order_id` INT NOT NULL,
   `plate_id` INT NOT NULL,
+  `amount`   INT NOT NULL,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   INDEX `fk_orders_has_plates_plates_idx` (`plate_id` ASC),

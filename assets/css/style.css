@@ -36,6 +36,10 @@ body::-webkit-scrollbar-thumb {
   background-color: #f34c4c;
 }
 
+.color-primary {
+  color: #f34c4c;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Lobster', Arial, Helvetica, sans-serif;
   color: #333;
@@ -224,6 +228,34 @@ nav.app-nav .shopping-cart-notification-badge {
   line-height: 160%;
 }
 
+.page-shopping-cart .shopping-cart-table {
+  margin-top: 20px;
+}
+
+.page-shopping-cart .shopping-cart-table .payment-total {
+  font-weight: bold;
+  font-size: 20px;
+}
+
 .page-shopping-cart .make-order-btn-container {
+  margin-top: 20px;
+}
+
+.page-order-completed .order-completed-card {
+  margin-top: 45px;
+}
+
+.page-order-completed .order-completed-card .order-completed-icon {
   margin-top: 15px;
+  font-size: 64px;
+}
+
+.page-order-completed .order-completed-card .order-completed-notice,
+.page-order-completed .order-completed-card .order-completed-thanks,
+.page-order-completed .order-completed-card .order-completed-back-link {
+  margin-top: 20px;
+}
+
+.page-order-completed .order-completed-card .order-completed-back-link {
+  margin-top: 25px;
 }

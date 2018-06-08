@@ -13,43 +13,9 @@ function shoppingCartController() {
     return;
   }
 
-  $shopping_cart = getShoppingCart() ?: [];
-
-  $query = "";
-  $i = 0;
-
-  foreach($shopping_cart as $plate_slug => $amount) {
-    if ($i > 0) {
-      $query .= " UNION ALL ";
-    }
-
-    $query .= "SELECT `name`, `price` AS `unit_price`, 
-                      {$amount} AS `amount`, (`price` * {$amount}) AS `total_price` 
-               FROM `plates`
-               WHERE `plates`.`slug` = '$plate_slug'";
-    ++$i;
-  }
-
-  $result = dbQuery($query);
-
-  if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-      $added_plates[] = (object) $row;
-    }
-  }
-
-  $query = "SELECT `subtotal`, `iva`, ".
-                   "CAST((`subtotal` + ((`subtotal` * `iva`) / 100)) AS DECIMAL(6,2)) as `total` ".
-           "FROM  (SELECT SUM(`added_plates`.`total_price`) AS `subtotal`, ".
-                         "CAST(16.00 AS DECIMAL(6,2)) AS `iva` ".
-                  "FROM ({$query}) AS `added_plates` ".
-           ") as `payment`";
-
-  $result = dbQuery($query);
- 
-  if ($result->num_rows > 0) {
-    $payment = (object) $result->fetch_assoc();
-  }
+  $shopping_cart_details  = getShoppingCartDetails();
+  $added_plates           = $shopping_cart_details->added_plates;
+  $payment                = $shopping_cart_details->payment;
 }
 
 shoppingCartController();
@@ -66,14 +32,22 @@ include_once 'templates/header.php';
   <?php endif; ?>
   <div class="col s12">
     <div class="col offset-s3 s6">
-      <div class="card login-card">
+      <div class="card">
         <div class="card-content">
           <div class="row">
-            <div class="col s12">
+            <div class="col s6">
               <span class="card-title"><i class="material-icons left">shopping_cart</i>Mi Carrito</span>
             </div>
+            <div class="col s6 right-align">
+              <?php if ($total_plates_added > 0): ?>
+                <form action="reset_shopping_cart.php" method="POST">
+                  <input type="hidden" name="empty" value="1">
+                  <button type="submit" class="btn white color-primary"><i class="material-icons left">delete</i>Vaciar Carrito</button>
+                </form>
+              <?php endif; ?>
+            </div>
             <div class="col s12">
-              <table class="striped">
+              <table class="striped shopping-cart-table">
                 <thead>
                   <tr>
                     <th>Nombre</th>
@@ -83,7 +57,7 @@ include_once 'templates/header.php';
                   </tr>
                 </thead>
                 <tbody>
-                  <?php if (count($added_plates) > 0): ?>
+                  <?php if ($total_plates_added > 0): ?>
                     <?php foreach($added_plates as $added_plate): ?>
                       <tr>
                         <td><?php echo capitalize($added_plate->name) ?></td>
@@ -97,7 +71,7 @@ include_once 'templates/header.php';
                       <td colspan="4" class="center-align"><span>&laquo; No ha agregado platillos al carrito de compras todavía. &raquo;</span></td>
                     </tr>
                   <?php endif; ?>
-                  <?php if (count($added_plates) > 0): ?>
+                  <?php if ($total_plates_added > 0): ?>
                     <tr>
                       <td colspan="2">&nbsp;</td>
                       <td><b>Subtotal</b></td>
@@ -110,15 +84,16 @@ include_once 'templates/header.php';
                     </tr>
                     <tr>
                       <td colspan="2">&nbsp;</td>
-                      <td><b>Total</b></td>
-                      <td class="right-align"><?php echo toMoney($payment->total); ?></td>
+                      <td class="payment-total"><b>Total</b></td>
+                      <td class="right-align payment-total"><?php echo toMoney($payment->total); ?></td>
                     </tr>
                   <?php endif; ?>
                 </tbody>
               </table>
-              <?php if (count($added_plates) > 0): ?>
+              <?php if ($total_plates_added > 0): ?>
                 <div class="col s12 center-align make-order-btn-container">
-                  <form action="#" method="POST">
+                  <form action="make_order.php" method="POST">
+                    <input type="hidden" name="make" value="1">
                     <button type="submit" class="btn btn-primary"><i class="material-icons left">check</i>Realizar Pedido</button>
                   </form>
                 </div>

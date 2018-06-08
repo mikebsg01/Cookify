@@ -4,15 +4,18 @@ require_once 'system/core.php';
 
 $is_loggued = false;
 $user_data = null;
+$total_plates_added = 0;
 
 function headerController() {
-  global $is_loggued, $user_data;
+  global $is_loggued, $user_data, $total_plates_added;
   
   $is_loggued = isLoggued();
 
   if ($is_loggued) {
     $user_data = getUserData(['first_name', 'last_name']);
   }
+
+  $total_plates_added = getTotalPlatesAdded();
 }
 
 headerController();
@@ -20,11 +23,18 @@ headerController();
 <div class="navbar-fixed">
   <nav class="app-nav">
     <div class="nav-wrapper">
-      <a href="index.php" class="brand-logo">Cookify<i class="material-icons right">restaurant</i></a>
+      <a href="index.php" title="Ir al Inicio" class="brand-logo">Cookify<i class="material-icons right">restaurant</i></a>
       <ul class="right hide-on-med-and-down">
         <?php if ($is_loggued): ?>
           <li><a href="#"><i class="material-icons left">list</i> Ver Menú Completo</a></li>
-          <li><a href="shopping_cart.php"><span class="shopping-cart-notification-badge new badge" data-badge-caption="<?php echo "9" ?>"></span><i class="material-icons left">shopping_cart</i> Mi carrito</a></li>
+          <li class="<?php echo (App::getCurrentAction() == 'shopping_cart' ? 'active' : '') ?>">
+            <a href="shopping_cart.php">
+              <?php if ($total_plates_added > 0): ?>
+                <span class="shopping-cart-notification-badge new badge" data-badge-caption="<?php echo $total_plates_added; ?>"></span>
+              <?php endif; ?>
+              <i class="material-icons left">shopping_cart</i> Mi carrito
+            </a>
+          </li>
           <li>
             <a href="#" class="dropdown-trigger" href="#!" data-target="dropdown-menu-user"><i class="material-icons left">person</i><?php echo getShortName($user_data['first_name'], $user_data['last_name']); ?><i class="material-icons right">arrow_drop_down</i></a>
           </li>

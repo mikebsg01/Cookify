@@ -36,7 +36,7 @@ include_once 'templates/header.php';
       <div class="plates-container row">
         <div class="col s12 center-align">
           <header>
-            <h2 class="plates-container-title">Platillos agregados recientemente</h2>
+            <h2 class="plates-container-title">Platillos más destacados</h2>
           </header>
         </div>
         <?php foreach ($plates as $plate): ?>

@@ -112,6 +112,43 @@ if (! function_exists('dbMultiQuery')) {
   }
 }
 
+if (! function_exists('dbTransaction')) {
+  function dbTransaction() {
+    $conn         = dbConnection();
+    $queries      = func_get_args();
+    $all_query_ok = count($queries) > 0;
+    $results      = [];
+
+    $conn->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
+    
+    try {
+      foreach ($queries as $query) {
+        if (is_string($query)) {
+          $result = $conn->query($query);
+          $results[] = $result;
+
+          if (! $result) {
+            throw new Exception('MYSQL TRANSACTION FAILED');
+          }
+        } else if ($query instanceof Closure) {
+          $query($conn, $results);
+        }
+      }
+    } catch (Exception $e) {
+      $all_query_ok = false;
+      $conn->rollback();
+    }
+
+    $conn->commit();
+    $conn->close();
+
+    return (object) [
+      'all_query_ok'  => $all_query_ok,
+      'results'       => $results
+    ];
+  }
+}
+
 if (! function_exists('getCounter')) {
   function getCounter($queryResult) {
     if ($queryResult->num_rows > 0) {
@@ -282,10 +319,16 @@ if (! function_exists('getCategory')) {
   }
 }
 
+if (! function_exists('resetShoppingCart')) {
+  function resetShoppingCart() {
+    $_SESSION['shopping_cart'] = [];
+  }
+}
+
 if (! function_exists('addToShoppingCart')) {
   function addToShoppingCart($plate_slug) {
     if (! isset($_SESSION['shopping_cart'])) {
-      $_SESSION['shopping_cart'] = [];
+      resetShoppingCart();
     }
 
     $amount = 1;
@@ -302,6 +345,71 @@ if (! function_exists('addToShoppingCart')) {
 
 if (! function_exists('getShoppingCart')) {
   function getShoppingCart() {
+    if (! isset($_SESSION['shopping_cart'])) {
+      resetShoppingCart();
+    }
+
     return $_SESSION['shopping_cart'];
+  }
+}
+
+if (! function_exists('getShoppingCartDetails')) {
+  function getShoppingCartDetails() {
+    $shopping_cart = getShoppingCart() ?: [];$added_plates = [];
+    $payment = null;
+
+    $query = "";
+    $i = 0;
+
+    foreach($shopping_cart as $plate_slug => $amount) {
+      if ($i > 0) {
+        $query .= " UNION ALL ";
+      }
+
+      $query .= "SELECT `name`, `price` AS `unit_price`, 
+                        {$amount} AS `amount`, (`price` * {$amount}) AS `total_price` 
+                FROM `plates`
+                WHERE `plates`.`slug` = '$plate_slug'";
+      ++$i;
+    }
+
+    $result = dbQuery($query);
+
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        $added_plates[] = (object) $row;
+      }
+    }
+
+    $query = "SELECT `subtotal`, `iva`, ".
+                   "CAST((`subtotal` + ((`subtotal` * `iva`) / 100)) AS DECIMAL(6,2)) as `total` ".
+           "FROM  (SELECT SUM(`added_plates`.`total_price`) AS `subtotal`, ".
+                         "CAST(16.00 AS DECIMAL(6,2)) AS `iva` ".
+                  "FROM ({$query}) AS `added_plates` ".
+           ") as `payment`";
+
+    $result = dbQuery($query);
+  
+    if ($result->num_rows > 0) {
+      $payment = (object) $result->fetch_assoc();
+    }
+
+    return (object) [
+      'added_plates'  => $added_plates,
+      'payment'       => $payment
+    ];
+  }
+}
+
+if (! function_exists('getTotalPlatesAdded')) {
+  function getTotalPlatesAdded() {
+    $shopping_cart = getShoppingCart() ?: [];
+    $total_plates = 0;
+    
+    foreach($shopping_cart as $plate_slug => $amount) {
+      $total_plates += $amount;
+    }
+
+    return (int) $total_plates;
   }
 }
