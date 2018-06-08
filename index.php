@@ -44,13 +44,13 @@ include_once 'templates/header.php';
             <div class="plate-card card">
               <div class="plate-image card-image">
                 <img src="<?php echo getImageSource($plate->image_id); ?>" alt="Imagen de <?php echo $plate->name; ?>">
-                <span class="card-title"><?php echo capitalize($plate->name); ?></span>
+                <span class="plate-name card-title"><?php echo capitalize($plate->name); ?></span>
                 <form action="add_to_shopping_cart.php" method="POST">
                   <input type="hidden" name="add_plate" value="<?php echo $plate->slug; ?>">
                   <button type="submit" class="btn-floating btn-large halfway-fab waves-effect waves-light red"><i class="material-icons">add_shopping_cart</i></button>
                 </form>
               </div>
-              <div class="card-content">
+              <div class="plate-description card-content">
                 <p><?php echo strLimit(trim($plate->description), 80); ?></p>
               </div>
               <div class="card-action">

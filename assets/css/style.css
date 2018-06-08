@@ -89,6 +89,15 @@ nav.app-nav a:focus {
   color: white;
 }
 
+nav.app-nav .shopping-cart-notification-badge {
+  position: absolute;
+  margin-top: 8px;
+  margin-left: -55px;
+  min-width: 25px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .alert-info {
   background-color: #fb8c00 !important;
   position: fixed;
@@ -182,6 +191,17 @@ nav.app-nav a:focus {
 
 .page-index .plates-container .plate-card span.badge.plate-category {
   background-color: #ffa42f;
+}
+
+.page-index .plates-container .plate-card .plate-name {
+  text-shadow: 2px 2px 1px rgba(0,0,0,0.6);
+}
+
+.page-index .plates-container .plate-card .plate-description {
+  min-height: 114px;
+  height: 114px;
+  max-height: 114px;
+  overflow: hidden;
 }
 
 .page-login .login-card {

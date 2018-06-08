@@ -24,6 +24,7 @@ headerController();
       <ul class="right hide-on-med-and-down">
         <?php if ($is_loggued): ?>
           <li><a href="#"><i class="material-icons left">list</i> Ver Menú Completo</a></li>
+          <li><a href="shopping_cart.php"><span class="shopping-cart-notification-badge new badge" data-badge-caption="<?php echo "9" ?>"></span><i class="material-icons left">shopping_cart</i> Mi carrito</a></li>
           <li>
             <a href="#" class="dropdown-trigger" href="#!" data-target="dropdown-menu-user"><i class="material-icons left">person</i><?php echo getShortName($user_data['first_name'], $user_data['last_name']); ?><i class="material-icons right">arrow_drop_down</i></a>
           </li>

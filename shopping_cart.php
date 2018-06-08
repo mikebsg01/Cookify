@@ -13,7 +13,7 @@ function shoppingCartController() {
     return;
   }
 
-  $shopping_cart = getShoppingCart();
+  $shopping_cart = getShoppingCart() ?: [];
 
   $query = "";
   $i = 0;
@@ -83,36 +83,46 @@ include_once 'templates/header.php';
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach($added_plates as $added_plate): ?>
+                  <?php if (count($added_plates) > 0): ?>
+                    <?php foreach($added_plates as $added_plate): ?>
+                      <tr>
+                        <td><?php echo capitalize($added_plate->name) ?></td>
+                        <td class="right-align"><?php echo toMoney($added_plate->unit_price) ?></td>
+                        <td class="center-align"><?php echo $added_plate->amount ?></td>
+                        <td class="right-align"><b><?php echo toMoney($added_plate->total_price) ?></b></td>
+                      </tr>
+                    <?php endforeach; ?>
+                  <?php else: ?>
                     <tr>
-                      <td><?php echo capitalize($added_plate->name) ?></td>
-                      <td class="right-align"><?php echo toMoney($added_plate->unit_price) ?></td>
-                      <td class="center-align"><?php echo $added_plate->amount ?></td>
-                      <td class="right-align"><b><?php echo toMoney($added_plate->total_price) ?></b></td>
+                      <td colspan="4" class="center-align"><span>&laquo; No ha agregado platillos al carrito de compras todavía. &raquo;</span></td>
                     </tr>
-                  <?php endforeach; ?>
-                  <tr>
-                    <td colspan="2">&nbsp;</td>
-                    <td><b>Subtotal</b></td>
-                    <td class="right-align"><?php echo toMoney($payment->subtotal); ?></td>
-                  </tr>
-                  <tr>
-                    <td colspan="2">&nbsp;</td>
-                    <td><b>IVA</b></td>
-                    <td class="right-align"><?php echo $payment->iva ?></td>
-                  </tr>
-                  <tr>
-                    <td colspan="2">&nbsp;</td>
-                    <td><b>Total</b></td>
-                    <td class="right-align"><?php echo toMoney($payment->total); ?></td>
-                  </tr>
+                  <?php endif; ?>
+                  <?php if (count($added_plates) > 0): ?>
+                    <tr>
+                      <td colspan="2">&nbsp;</td>
+                      <td><b>Subtotal</b></td>
+                      <td class="right-align"><?php echo toMoney($payment->subtotal); ?></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">&nbsp;</td>
+                      <td><b>IVA</b></td>
+                      <td class="right-align"><?php echo ($payment->iva ?: '16.00') ?></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">&nbsp;</td>
+                      <td><b>Total</b></td>
+                      <td class="right-align"><?php echo toMoney($payment->total); ?></td>
+                    </tr>
+                  <?php endif; ?>
                 </tbody>
               </table>
-              <div class="col s12 center-align make-order-btn-container">
-                <form action="#" method="POST">
-                  <button type="submit" class="btn btn-primary"><i class="material-icons left">check</i>Realizar Pedido</button>
-                </form>
-              </div>
+              <?php if (count($added_plates) > 0): ?>
+                <div class="col s12 center-align make-order-btn-container">
+                  <form action="#" method="POST">
+                    <button type="submit" class="btn btn-primary"><i class="material-icons left">check</i>Realizar Pedido</button>
+                  </form>
+                </div>
+              <?php endif; ?>
             </div>
           </div>
         </div>
