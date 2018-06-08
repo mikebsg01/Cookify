@@ -96,6 +96,22 @@ if (! function_exists('dbQuery')) {
   }
 }
 
+if (! function_exists('dbMultiQuery')) {
+  function dbMultiQuery() {
+    $conn = dbConnection();
+    $result = [];
+    
+    foreach (func_get_args() as $query) {
+      $query = (string) $query;
+
+      $result[] = $conn->query($query);
+    }
+
+    $conn->close();
+    return $result;
+  }
+}
+
 if (! function_exists('getCounter')) {
   function getCounter($queryResult) {
     if ($queryResult->num_rows > 0) {
@@ -128,6 +144,27 @@ if (! function_exists('getError')) {
   function getError(string $key) {
     $content = $_SESSION['errors'][$key];
     unset($_SESSION['errors'][$key]);
+
+    return $content;
+  }
+}
+
+if (! function_exists('existsFlash')) {
+  function existsFlash(string $key) {
+    return isset($_SESSION['flash'][$key]);
+  }
+}
+
+if (! function_exists('makeFlash')) {
+  function makeFlash(string $key, $content) {
+    $_SESSION['flash'][$key] = $content;
+  }
+}
+
+if (! function_exists('getFlash')) {
+  function getFlash(string $key) {
+    $content = $_SESSION['flash'][$key];
+    unset($_SESSION['flash'][$key]);
 
     return $content;
   }
@@ -239,8 +276,32 @@ if (! function_exists('getCategory')) {
   if ($result->num_rows == 1) {
     $category = $result->fetch_assoc();
 
-    return $category;
+    return (object) $category;
   }
   return null;
+  }
+}
+
+if (! function_exists('addToShoppingCart')) {
+  function addToShoppingCart($plate_slug) {
+    if (! isset($_SESSION['shopping_cart'])) {
+      $_SESSION['shopping_cart'] = [];
+    }
+
+    $amount = 1;
+
+    if (in_array($plate_slug, array_keys($_SESSION['shopping_cart']))) {
+      $amount = ((int) $_SESSION['shopping_cart'][$plate_slug]) + 1;
+
+      $_SESSION['shopping_cart'][$plate_slug] = $amount;
+    } else {
+      $_SESSION['shopping_cart'] += [$plate_slug => $amount];
+    }
+  }
+}
+
+if (! function_exists('getShoppingCart')) {
+  function getShoppingCart() {
+    return $_SESSION['shopping_cart'];
   }
 }

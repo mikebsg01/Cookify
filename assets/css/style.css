@@ -32,6 +32,10 @@ body::-webkit-scrollbar-thumb {
   background-color: #616161
 }
 
+.bg-color-primary {
+  background-color: #f34c4c;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Lobster', Arial, Helvetica, sans-serif;
   color: #333;
@@ -83,6 +87,31 @@ nav.app-nav a:hover,
 nav.app-nav a:active,
 nav.app-nav a:focus {
   color: white;
+}
+
+.alert-info {
+  background-color: #fb8c00 !important;
+  position: fixed;
+  display: block;
+  top: 40px;
+  left: 0;
+  right: 0;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: 50%;
+  z-index: 999;
+}
+
+.app-close-alert {
+  cursor: pointer;
+  color: #F1F1F1;
+}
+
+.app-close-alert:hover,
+.app-close-alert:active,
+.app-close-alert:focus {
+  cursor: pointer;
+  color: #F9F9F9;
 }
 
 .btn-primary {
@@ -156,7 +185,7 @@ nav.app-nav a:focus {
 }
 
 .page-login .login-card {
-  margin-top: 30px;
+  margin-top: 45px;
 }
 
 .page-login .login-card .link-register span {
@@ -166,11 +195,15 @@ nav.app-nav a:focus {
 }
 
 .page-signup .signup-card {
-  margin-top: 30px;
+  margin-top: 45px;
 }
 
 .page-signup .signup-card .link-login span {
   display: block;
   margin-top: 30px;
   line-height: 160%;
+}
+
+.page-shopping-cart .make-order-btn-container {
+  margin-top: 15px;
 }

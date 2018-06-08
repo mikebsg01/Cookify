@@ -56,6 +56,12 @@ loginController();
 <?php include_once 'templates/head.php' ?>
 <?php include_once 'templates/header.php' ?>
 <div class="page-login row">
+  <?php if (existsFlash('ALERT_INFO')): ?>
+    <div class="card-panel orange darken-1 alert-info">
+      <span class="white-text"><?php echo getFlash('ALERT_INFO'); ?></span>
+      <i class="material-icons right app-close-alert">close</i>
+    </div>
+  <?php endif; ?>
   <div class="col s12">
     <div class="col offset-s4 s4">
       <div class="card login-card">

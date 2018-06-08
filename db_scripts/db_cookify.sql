@@ -143,16 +143,74 @@ INSERT INTO `db_cookify`.`images` (`file_path`, `file_name`, `file_extension`)
 INSERT INTO `db_cookify`.`images` (`file_path`, `file_name`, `file_extension`) 
     VALUES('/public/plates/img', 'img_default', 'png');
 
+-- Seeding "Plate images":
+INSERT INTO `db_cookify`.`images` (`file_path`, `file_name`, `file_extension`) 
+    VALUES('/public/plates/img', 'img-20180607-131313-hamburguesa-de-res', 'jpg');
+
+INSERT INTO `db_cookify`.`images` (`file_path`, `file_name`, `file_extension`) 
+    VALUES('/public/plates/img', 'img-20180607-131829-pizza-con-extra-queso', 'jpg');
+
+INSERT INTO `db_cookify`.`images` (`file_path`, `file_name`, `file_extension`) 
+    VALUES('/public/plates/img', 'img-20180607-ensalada', 'jpg');
+    
+INSERT INTO `db_cookify`.`images` (`file_path`, `file_name`, `file_extension`) 
+    VALUES('/public/plates/img', 'img-20180607-papas-a-la-francesa', 'jpg');
+    
+INSERT INTO `db_cookify`.`images` (`file_path`, `file_name`, `file_extension`) 
+    VALUES('/public/plates/img', 'img-20180607-ensalada-frutal', 'jpg');
+    
+INSERT INTO `db_cookify`.`images` (`file_path`, `file_name`, `file_extension`) 
+    VALUES('/public/plates/img', 'img-20180607-nuggets-de-pollo', 'jpg');
+    
+INSERT INTO `db_cookify`.`images` (`file_path`, `file_name`, `file_extension`) 
+    VALUES('/public/plates/img', 'img-20180607-pasta-marisco', 'jpg');
+
 -- Seeding "Categories":
 INSERT INTO `db_cookify`.`categories` (`name`, `slug`) 
     VALUES('comida rápida', 'comida-rapida');
 
+INSERT INTO `db_cookify`.`categories` (`name`, `slug`) 
+    VALUES('ensaladas', 'ensaladas');
+
+INSERT INTO `db_cookify`.`categories` (`name`, `slug`) 
+    VALUES('pastas', 'pastas');
+
 -- Seeding "Plates":
 INSERT INTO `db_cookify`.`plates` (`name`, `slug`, `description`, `price`, `category_id`, `image_id`) 
-      VALUES('hamburguesa de pollo', 'hamburguesa-pollo', 
-             'Rica hamburguesa de pollo, con lechuga, jitomate, queso amarillo y pepinillos.', 
-             49.90, 1, 2);
+      VALUES('hamburguesa de res', 'hamburguesa-de-res', 
+             'Rica hamburguesa de res, con lechuga, jitomate, queso amarillo y pepinillos.', 
+             49.90, 1, 3);
 
+INSERT INTO `db_cookify`.`plates` (`name`, `slug`, `description`, `price`, `category_id`, `image_id`) 
+      VALUES('Pizza con extra queso', 'pizza-con-extra-queso', 
+             'Deliciosa Pizza con Extra Queso, acompañada de Peperoni y Orilla Gruesa.', 
+             99, 1, 4);
+             
+INSERT INTO `db_cookify`.`plates` (`name`, `slug`, `description`, `price`, `category_id`, `image_id`) 
+      VALUES('Papas a la francesa', 'papas-a-la-francesa',
+             'Porción de papas fritas, crujientes y doradas a la perfección.', 
+             25.90, 1, 6);
+
+INSERT INTO `db_cookify`.`plates` (`name`, `slug`, `description`, `price`, `category_id`, `image_id`) 
+      VALUES('Nuggets de pollo', 'nuggets-de-pollo', 
+             'Ricos trocitos de pollo empanizados.', 
+             35.50, 1, 8); 
+             
+INSERT INTO `db_cookify`.`plates` (`name`, `slug`, `description`, `price`, `category_id`, `image_id`) 
+      VALUES('Ensalada', 'ensalada', 
+             'Ensalada con lechuga, tomates y pequeños trozos de pollo',
+             89.99, 2, 5); 
+      
+INSERT INTO `db_cookify`.`plates` (`name`, `slug`, `description`, `price`, `category_id`, `image_id`) 
+      VALUES('Ensalada frutal', 'ensalada-frutal', 
+             'Ensalada de diversas frutas como fresa, platano, kiwi, frambuesas y uvas.', 
+             80.00, 2, 7);
+             
+INSERT INTO `db_cookify`.`plates` (`name`, `slug`, `description`, `price`, `category_id`, `image_id`) 
+      VALUES('Pasta con mariscos', 'pasta-marisco', 
+             'Exquisita pasta con camarón', 
+             110.00, 3, 9);
+      
 -- Seeding "Admin Users":
 INSERT INTO `db_cookify`.`users` 
 	(`is_admin`,`first_name`, `last_name`, `full_name`, `photo_id`, `phone_number`, `email`, `password`)
