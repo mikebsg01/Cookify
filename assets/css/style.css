@@ -102,8 +102,8 @@ nav.app-nav .shopping-cart-notification-badge {
   padding-right: 0;
 }
 
-.alert-info {
-  background-color: #fb8c00 !important;
+.alert-info,
+.alert-success {
   position: fixed;
   display: block;
   top: 40px;
@@ -113,6 +113,10 @@ nav.app-nav .shopping-cart-notification-badge {
   margin-right: auto !important;
   width: 50%;
   z-index: 999;
+}
+
+.alert-info {
+  background-color: #fb8c00 !important;
 }
 
 .app-close-alert {

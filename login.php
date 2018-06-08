@@ -52,10 +52,17 @@ function loginController() {
 }
 
 loginController();
+
+include_once 'templates/head.php';
+include_once 'templates/header.php';
 ?>
-<?php include_once 'templates/head.php' ?>
-<?php include_once 'templates/header.php' ?>
 <div class="page-login row">
+  <?php if (existsFlash('ALERT_SUCCESS')): ?>
+    <div class="card-panel green darken-1 alert-success">
+      <span class="white-text"><?php echo getFlash('ALERT_SUCCESS'); ?></span>
+      <i class="material-icons right app-close-alert">close</i>
+    </div>
+  <?php endif; ?>
   <?php if (existsFlash('ALERT_INFO')): ?>
     <div class="card-panel orange darken-1 alert-info">
       <span class="white-text"><?php echo getFlash('ALERT_INFO'); ?></span>
