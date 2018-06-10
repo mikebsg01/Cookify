@@ -2,7 +2,7 @@
 Aplicación Web de Entrega de Comida a Domicilio - Proyecto Académico.
 
 # Requerimientos
-- PHP >= 7
+- PHP >= 7.1
 - MySQL >= 5.7
 
 ## Instalacion
